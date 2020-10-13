@@ -10,7 +10,7 @@ public class VehicleDto extends BaseDto{
 
     private String vehicleModel;
 
-    private String languageName;
+    private String language;
 
     private String countryMade;
 
@@ -26,7 +26,7 @@ public class VehicleDto extends BaseDto{
 
     private String usedCategory;
 
-    private String CDAInput;
+    private String cdaInput;
 
     private Boolean active;
 

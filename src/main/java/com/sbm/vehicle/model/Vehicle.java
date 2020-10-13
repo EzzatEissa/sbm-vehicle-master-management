@@ -13,7 +13,7 @@ public class Vehicle extends BaseEntity {
 
     private String vehicleModel;
 
-    private String languageName;
+    private String language;
 
     private String countryMade;
 
@@ -29,7 +29,7 @@ public class Vehicle extends BaseEntity {
 
     private String usedCategory;
 
-    private String CDAInput;
+    private String cdaInput;
 
     private Boolean active;
 
