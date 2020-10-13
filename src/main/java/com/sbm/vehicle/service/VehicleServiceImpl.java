@@ -21,15 +21,15 @@ public class VehicleServiceImpl implements com.sbm.vehicle.service.VehicleServic
     @Autowired
     private MapperHelper mapperHelper;
 
-    private final String EMPLOYER_NOT_FOUND = "Employer_Not_Found";
+    private final String Vehicle_NOT_FOUND = "Vehicle_Not_Found";
 
     @Override
     public VehicleDto getVehicleById(Long id) throws GenericExceptionMapper{
-        Optional<Vehicle> approvedEmployer = vehicleRepo.findById(id);
-        if(approvedEmployer.isPresent())
-            return mapperHelper.transform(approvedEmployer, VehicleDto.class);
+        Optional<Vehicle> vehicle = vehicleRepo.findById(id);
+        if(vehicle.isPresent())
+            return mapperHelper.transform(vehicle.get(), VehicleDto.class);
         else
-            throw new GenericExceptionMapper(EMPLOYER_NOT_FOUND, AppConstants.HTTP_CODE_NOT_FOUND);
+            throw new GenericExceptionMapper(Vehicle_NOT_FOUND, AppConstants.HTTP_CODE_NOT_FOUND);
     }
 
     @Override
@@ -49,17 +49,17 @@ public class VehicleServiceImpl implements com.sbm.vehicle.service.VehicleServic
 
     @Override
     public VehicleDto updateVehicle(VehicleDto vehicleDto) throws GenericExceptionMapper{
-        Optional<Vehicle> approvedEmployer= vehicleRepo.findById(vehicleDto.getId());
+        Optional<Vehicle> vehicle = vehicleRepo.findById(vehicleDto.getId());
 
-        if(approvedEmployer.isPresent()){
+        if(vehicle.isPresent()){
             try {
-                mapperHelper.partialMap(vehicleDto, approvedEmployer.get());
-                return mapperHelper.transform(vehicleRepo.save(approvedEmployer.get()), VehicleDto.class);
+                mapperHelper.partialMap(vehicleDto, vehicle.get());
+                return mapperHelper.transform(vehicleRepo.save(vehicle.get()), VehicleDto.class);
             } catch (Exception ex){
                 throw new GenericExceptionMapper(ex.getMessage(), AppConstants.HTTP_CODE_SEVER_ERROR);
             }
         } else
-            throw new GenericExceptionMapper(EMPLOYER_NOT_FOUND, AppConstants.HTTP_CODE_NOT_FOUND);
+            throw new GenericExceptionMapper(Vehicle_NOT_FOUND, AppConstants.HTTP_CODE_NOT_FOUND);
 
 
 
@@ -67,15 +67,15 @@ public class VehicleServiceImpl implements com.sbm.vehicle.service.VehicleServic
 
     @Override
     public void deleteVehicle(Long id) throws GenericExceptionMapper{
-        Optional<Vehicle> approvedEmployer= vehicleRepo.findById(id);
-        if(approvedEmployer.isPresent()){
+        Optional<Vehicle> vehicle = vehicleRepo.findById(id);
+        if(vehicle.isPresent()){
             try {
-                vehicleRepo.delete(approvedEmployer.get());
+                vehicleRepo.delete(vehicle.get());
             } catch (Exception ex) {
                 throw new GenericExceptionMapper(ex.getMessage(), AppConstants.HTTP_CODE_SEVER_ERROR);
             }
         }
         else
-            throw new GenericExceptionMapper(EMPLOYER_NOT_FOUND, AppConstants.HTTP_CODE_NOT_FOUND);
+            throw new GenericExceptionMapper(Vehicle_NOT_FOUND, AppConstants.HTTP_CODE_NOT_FOUND);
     }
 }

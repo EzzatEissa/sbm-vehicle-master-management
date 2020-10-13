@@ -6,8 +6,6 @@ import lombok.Data;
 import javax.persistence.*;
 
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "type", discriminatorType = DiscriminatorType.STRING)
 @Data
 public class Vehicle extends BaseEntity {
 

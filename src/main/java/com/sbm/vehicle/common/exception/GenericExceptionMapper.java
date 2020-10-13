@@ -26,15 +26,16 @@ public class GenericExceptionMapper extends Exception implements
     public GenericExceptionMapper(String message, Integer code) {
         super(message);
         this.code = code;
+        this.msg = message;
     }
 
     @Override
     public Response toResponse(GenericExceptionMapper ex) {
-        if(code == null)
+        if(ex.code == null)
             return Response.status(500).entity(new ErrorResponse(ex.getMessage(), 500))
                 .type(MediaType.APPLICATION_JSON).build();
         else
-            return Response.status(code).entity(new ErrorResponse(ex.getMessage(), code))
+            return Response.status(ex.code).entity(new ErrorResponse(ex.getMessage(), ex.code))
                     .type(MediaType.APPLICATION_JSON).build();
     }
 }
