@@ -1,11 +1,11 @@
-package com.sbm.vehicle.service;
+package com.sbm.vehicle.modules.vehicle.service;
 
 import com.sbm.vehicle.common.consts.AppConstants;
 import com.sbm.vehicle.common.exception.GenericExceptionMapper;
 import com.sbm.vehicle.common.utils.MapperHelper;
-import com.sbm.vehicle.dto.VehicleDto;
-import com.sbm.vehicle.model.Vehicle;
-import com.sbm.vehicle.repository.VehicleRepo;
+import com.sbm.vehicle.modules.vehicle.dto.VehicleDto;
+import com.sbm.vehicle.modules.vehicle.model.Vehicle;
+import com.sbm.vehicle.modules.vehicle.repository.VehicleRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class VehicleServiceImpl implements com.sbm.vehicle.service.VehicleService {
+public class VehicleServiceImpl implements com.sbm.vehicle.modules.vehicle.service.VehicleService {
 
     @Autowired
     private VehicleRepo vehicleRepo;

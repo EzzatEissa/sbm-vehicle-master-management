@@ -1,10 +1,13 @@
-package com.sbm.vehicle.dto;
+package com.sbm.vehicle.modules.vehicle.model;
 
-import com.sbm.vehicle.common.dto.BaseDto;
+import com.sbm.vehicle.common.model.BaseEntity;
 import lombok.Data;
 
+import javax.persistence.*;
+
+@Entity
 @Data
-public class VehicleDto extends BaseDto{
+public class Vehicle extends BaseEntity {
 
     private String vehicleMaker;
 

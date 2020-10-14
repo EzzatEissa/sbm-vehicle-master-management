@@ -1,6 +1,6 @@
-package com.sbm.vehicle.repository;
+package com.sbm.vehicle.modules.vehicle.repository;
 
-import com.sbm.vehicle.model.Vehicle;
+import com.sbm.vehicle.modules.vehicle.model.Vehicle;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

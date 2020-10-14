@@ -1,7 +1,7 @@
-package com.sbm.vehicle.service;
+package com.sbm.vehicle.modules.vehicle.service;
 
 import com.sbm.vehicle.common.exception.GenericExceptionMapper;
-import com.sbm.vehicle.dto.VehicleDto;
+import com.sbm.vehicle.modules.vehicle.dto.VehicleDto;
 
 import java.util.List;
 
