@@ -3,9 +3,9 @@ package com.sbm.vehicle.modules.lookup.service;
 import com.sbm.vehicle.common.consts.AppConstants;
 import com.sbm.vehicle.common.exception.GenericExceptionMapper;
 import com.sbm.vehicle.common.utils.MapperHelper;
-import com.sbm.vehicle.modules.lookup.dto.CountryMadeDto;
-import com.sbm.vehicle.modules.lookup.model.CountryMade;
-import com.sbm.vehicle.modules.lookup.repository.CountryMadeRepo;
+import com.sbm.vehicle.modules.lookup.dto.CountryMakeDto;
+import com.sbm.vehicle.modules.lookup.model.CountryMake;
+import com.sbm.vehicle.modules.lookup.repository.CountryMakeRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,10 +13,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class CountryMadeServiceImpl implements CountryMadeService{
+public class CountryMakeServiceImpl implements CountryMakeService{
 
     @Autowired
-    CountryMadeRepo countryMadeRepo;
+    CountryMakeRepo countryMakeRepo;
 
     @Autowired
     private MapperHelper mapperHelper;
@@ -25,10 +25,10 @@ public class CountryMadeServiceImpl implements CountryMadeService{
 
     @Override
     public void delete(Long id)  throws GenericExceptionMapper{
-        Optional<CountryMade> countryMade = countryMadeRepo.findById(id);
-        if(countryMade.isPresent()){
+        Optional<CountryMake> countryMake = countryMakeRepo.findById(id);
+        if(countryMake.isPresent()){
             try {
-                countryMadeRepo.delete(countryMade.get());
+                countryMakeRepo.delete(countryMake.get());
             } catch (Exception ex) {
                 throw new GenericExceptionMapper(ex.getMessage(), AppConstants.HTTP_CODE_SEVER_ERROR);
             }
@@ -38,36 +38,36 @@ public class CountryMadeServiceImpl implements CountryMadeService{
     }
 
     @Override
-    public CountryMadeDto find(Long id)  throws GenericExceptionMapper{
-        Optional<CountryMade> countryMade = countryMadeRepo.findById(id);
-        if(countryMade.isPresent())
-            return mapperHelper.transform(countryMade.get(), CountryMadeDto.class);
+    public CountryMakeDto find(Long id)  throws GenericExceptionMapper{
+        Optional<CountryMake> countryMake = countryMakeRepo.findById(id);
+        if(countryMake.isPresent())
+            return mapperHelper.transform(countryMake.get(), CountryMakeDto.class);
         else
             throw new GenericExceptionMapper(NOT_FOUND, AppConstants.HTTP_CODE_NOT_FOUND);
     }
 
     @Override
-    public List<CountryMadeDto> findAll() {
-        return mapperHelper.transform(countryMadeRepo.findAll(), CountryMadeDto.class);
+    public List<CountryMakeDto> findAll() {
+        return mapperHelper.transform(countryMakeRepo.findAll(), CountryMakeDto.class);
     }
 
     @Override
-    public void save(CountryMadeDto countryMadeDto) throws GenericExceptionMapper{
+    public void save(CountryMakeDto countryMakeDto) throws GenericExceptionMapper{
         try{
-            mapperHelper.transform(countryMadeRepo.save(mapperHelper.transform(countryMadeDto, CountryMade.class)), CountryMadeDto.class);
+            mapperHelper.transform(countryMakeRepo.save(mapperHelper.transform(countryMakeDto, CountryMake.class)), CountryMakeDto.class);
         } catch(Exception ex){
             throw new GenericExceptionMapper(ex.getMessage(), AppConstants.HTTP_CODE_SEVER_ERROR);
         }
     }
 
     @Override
-    public CountryMadeDto update(CountryMadeDto countryMadeDto) throws GenericExceptionMapper {
-        Optional<CountryMade> countryMade = countryMadeRepo.findById(countryMadeDto.getId());
+    public CountryMakeDto update(CountryMakeDto countryMakeDto) throws GenericExceptionMapper {
+        Optional<CountryMake> countryMake = countryMakeRepo.findById(countryMakeDto.getId());
 
-        if(countryMade.isPresent()){
+        if(countryMake.isPresent()){
             try {
-                mapperHelper.partialMap(countryMadeDto, countryMade.get());
-                return mapperHelper.transform(countryMadeRepo.save(countryMade.get()), CountryMadeDto.class);
+                mapperHelper.partialMap(countryMakeDto, countryMake.get());
+                return mapperHelper.transform(countryMakeRepo.save(countryMake.get()), CountryMakeDto.class);
             } catch (Exception ex){
                 throw new GenericExceptionMapper(ex.getMessage(), AppConstants.HTTP_CODE_SEVER_ERROR);
             }

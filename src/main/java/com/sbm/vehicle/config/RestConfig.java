@@ -15,7 +15,7 @@ public class RestConfig extends ResourceConfig {
 	public RestConfig() {
 
 		register(VehicleController.class);
-		register(CountryMadeController.class);
+		register(CountryMakeController.class);
 		register(NewVehicleBodyTypeController.class);
 		register(VehicleBodyTypeController.class);
 		register(VehicleCategoryController.class);

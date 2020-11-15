@@ -1,6 +1,7 @@
 package com.sbm.vehicle.modules.vehicle.model;
 
 import com.sbm.vehicle.common.model.BaseEntity;
+import com.sbm.vehicle.modules.lookup.model.*;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -15,15 +16,20 @@ public class Vehicle extends BaseEntity {
 
     private String language;
 
-    private String countryMade;
+    @ManyToOne
+    private CountryMake countryMake;
 
-    private String newVehicleBodyType;
+    @ManyToOne
+    private NewVehicleBodyType newVehicleBodyType;
 
-    private String vehicleBodyType;
+    @ManyToOne
+    private VehicleBodyType vehicleBodyType;
 
-    private String vehicleType;
+    @ManyToOne
+    private VehicleType vehicleType;
 
-    private String vehicleCategory;
+    @ManyToOne
+    private VehicleCategory vehicleCategory;
 
     private String category50per50;
 

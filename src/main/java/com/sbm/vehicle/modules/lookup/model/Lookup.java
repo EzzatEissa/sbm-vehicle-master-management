@@ -13,17 +13,17 @@ public class Lookup extends BaseEntity implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 
-	@Version
-    @Column(name = "version")
-    private Integer version;
-
-	public Integer getVersion() {
-        return this.version;
-    }
-
-	public void setVersion(Integer version) {
-        this.version = version;
-    }
+//	@Version
+//    @Column(name = "version")
+//    private Integer version;
+//
+//	public Integer getVersion() {
+//        return this.version;
+//    }
+//
+//	public void setVersion(Integer version) {
+//        this.version = version;
+//    }
 
     @NotNull
     private String name;

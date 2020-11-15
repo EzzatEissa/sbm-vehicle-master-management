@@ -1,6 +1,7 @@
 package com.sbm.vehicle.modules.vehicle.dto;
 
 import com.sbm.vehicle.common.dto.BaseDto;
+import com.sbm.vehicle.modules.lookup.dto.*;
 import lombok.Data;
 
 @Data
@@ -12,15 +13,15 @@ public class VehicleDto extends BaseDto{
 
     private String language;
 
-    private String countryMade;
+    private CountryMakeDto countryMake;
 
-    private String newVehicleBodyType;
+    private NewVehicleBodyTypeDto newVehicleBodyType;
 
-    private String vehicleBodyType;
+    private VehicleBodyTypeDto vehicleBodyType;
 
-    private String vehicleType;
+    private VehicleTypeDto vehicleType;
 
-    private String vehicleCategory;
+    private VehicleCategoryDto vehicleCategory;
 
     private String category50per50;
 
