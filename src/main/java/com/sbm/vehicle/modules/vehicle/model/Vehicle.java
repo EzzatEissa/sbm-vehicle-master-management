@@ -31,13 +31,13 @@ public class Vehicle extends BaseEntity {
     @ManyToOne
     private VehicleCategory vehicleCategory;
 
-    private String category50per50;
+    private Boolean category50per50;
 
-    private String usedCategory;
+    private Boolean usedCategory;
 
-    private String cdaInput;
+    private Integer cdaInput;
 
     private Boolean active;
 
-    private String sijilVehicleCode;
+    private Integer sijilVehicleCode;
 }

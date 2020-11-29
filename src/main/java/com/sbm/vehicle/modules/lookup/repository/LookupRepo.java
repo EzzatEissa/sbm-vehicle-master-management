@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface LookupRepo extends JpaRepository<Lookup, Long> {
+
+    Lookup getByName(String name);
 }

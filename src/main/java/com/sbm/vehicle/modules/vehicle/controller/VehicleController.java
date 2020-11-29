@@ -11,6 +11,7 @@ import javax.validation.Valid;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.List;
 
 @Service
 @Path("/vehicle")
@@ -57,4 +58,37 @@ public class VehicleController {
         vehicleService.deleteVehicle(id);
         return Response.status(200).entity(AppConstants.HTTP_STATUS_DELETED).build();
     }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/search")
+    public Response getVehiclesByFields(@QueryParam("vehicleMaker") String vehicleMaker,
+                                        @QueryParam("vehicleModel") String vehicleModel,
+                                        @QueryParam("countryMake") String countryMake,
+                                        @QueryParam("newVehicleBodyType") String newVehicleBodyType,
+                                        @QueryParam("vehicleBodyType") String vehicleBodyType,
+                                        @QueryParam("vehicleType") String vehicleType,
+                                        @QueryParam("vehicleCategory") String vehicleCategory,
+                                        @QueryParam("category50per50") Boolean category50per50,
+                                        @QueryParam("usedCategory") Boolean usedCategory,
+                                        @QueryParam("cdaInput") Integer cdaInput,
+                                        @QueryParam("sijilVehicleCode") Integer sijilVehicleCode
+                                        ) throws GenericExceptionMapper {
+        VehicleDto vehicleDto = new VehicleDto();
+        vehicleDto.setVehicleMaker(vehicleMaker);
+        vehicleDto.setVehicleModel(vehicleModel);
+        vehicleDto.setCountryMake(countryMake);
+        vehicleDto.setNewVehicleBodyType(newVehicleBodyType);
+        vehicleDto.setVehicleBodyType(vehicleBodyType);
+        vehicleDto.setVehicleType(vehicleType);
+        vehicleDto.setVehicleCategory(vehicleCategory);
+        vehicleDto.setUsedCategory(usedCategory);
+        vehicleDto.setCategory50per50(category50per50);
+        vehicleDto.setCdaInput(cdaInput);
+        vehicleDto.setSijilVehicleCode(sijilVehicleCode);
+
+        List<VehicleDto> vehicleDtos = vehicleService.getVehiclesByFields(vehicleDto);
+        return Response.status(200).entity(vehicleDtos).build();
+    }
+
 }

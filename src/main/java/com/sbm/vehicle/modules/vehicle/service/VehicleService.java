@@ -16,4 +16,6 @@ public interface VehicleService {
     VehicleDto updateVehicle(VehicleDto vehicleDto) throws GenericExceptionMapper;
 
     void deleteVehicle(Long id) throws GenericExceptionMapper;
+
+    List<VehicleDto> getVehiclesByFields(VehicleDto vehicleDto) throws GenericExceptionMapper;
 }

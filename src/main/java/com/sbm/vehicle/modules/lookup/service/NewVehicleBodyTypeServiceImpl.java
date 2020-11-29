@@ -4,6 +4,7 @@ import com.sbm.vehicle.common.consts.AppConstants;
 import com.sbm.vehicle.common.exception.GenericExceptionMapper;
 import com.sbm.vehicle.common.utils.MapperHelper;
 import com.sbm.vehicle.modules.lookup.dto.NewVehicleBodyTypeDto;
+import com.sbm.vehicle.modules.lookup.model.CountryMake;
 import com.sbm.vehicle.modules.lookup.model.NewVehicleBodyType;
 import com.sbm.vehicle.modules.lookup.model.NewVehicleBodyType;
 import com.sbm.vehicle.modules.lookup.repository.NewVehicleBodyTypeRepo;
@@ -74,5 +75,9 @@ public class NewVehicleBodyTypeServiceImpl implements NewVehicleBodyTypeService{
             }
         } else
             throw new GenericExceptionMapper(NOT_FOUND, AppConstants.HTTP_CODE_NOT_FOUND);
+    }
+    @Override
+    public NewVehicleBodyType getByName(String name) throws GenericExceptionMapper {
+        return newVehicleBodyTypeRepo.getByName(name);
     }
 }

@@ -13,23 +13,23 @@ public class VehicleDto extends BaseDto{
 
     private String language;
 
-    private CountryMakeDto countryMake;
+    private String countryMake;
 
-    private NewVehicleBodyTypeDto newVehicleBodyType;
+    private String newVehicleBodyType;
 
-    private VehicleBodyTypeDto vehicleBodyType;
+    private String vehicleBodyType;
 
-    private VehicleTypeDto vehicleType;
+    private String vehicleType;
 
-    private VehicleCategoryDto vehicleCategory;
+    private String vehicleCategory;
 
-    private String category50per50;
+    private Boolean category50per50;
 
-    private String usedCategory;
+    private Boolean usedCategory;
 
-    private String cdaInput;
+    private Integer cdaInput;
 
     private Boolean active;
 
-    private String sijilVehicleCode;
+    private Integer sijilVehicleCode;
 }

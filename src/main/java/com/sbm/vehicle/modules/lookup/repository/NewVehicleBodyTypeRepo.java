@@ -1,9 +1,12 @@
 package com.sbm.vehicle.modules.lookup.repository;
 
+import com.sbm.vehicle.modules.lookup.model.CountryMake;
 import com.sbm.vehicle.modules.lookup.model.NewVehicleBodyType;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public interface NewVehicleBodyTypeRepo extends JpaRepository<NewVehicleBodyType, Long> {
+
+    NewVehicleBodyType getByName(String name);
 }

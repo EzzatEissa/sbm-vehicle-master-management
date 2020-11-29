@@ -5,6 +5,7 @@ import com.sbm.vehicle.common.exception.GenericExceptionMapper;
 import com.sbm.vehicle.common.utils.MapperHelper;
 import com.sbm.vehicle.modules.lookup.dto.CountryMakeDto;
 import com.sbm.vehicle.modules.lookup.model.CountryMake;
+import com.sbm.vehicle.modules.lookup.model.Lookup;
 import com.sbm.vehicle.modules.lookup.repository.CountryMakeRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -73,5 +74,10 @@ public class CountryMakeServiceImpl implements CountryMakeService{
             }
         } else
             throw new GenericExceptionMapper(NOT_FOUND, AppConstants.HTTP_CODE_NOT_FOUND);
+    }
+
+    @Override
+    public CountryMake getByName(String name) throws GenericExceptionMapper {
+        return countryMakeRepo.getByName(name);
     }
 }

@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CountryMakeRepo extends JpaRepository<CountryMake, Long> {
+
+    CountryMake getByName(String name);
 }
