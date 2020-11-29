@@ -5,4 +5,36 @@
 
     <!-- here you can put customized mapping -->
 
+    <mapping stop-on-errors="false" map-null="false">
+
+        <class-a>com.sbm.vehicle.modules.vehicle.model.Vehicle</class-a>
+        <class-b>com.sbm.vehicle.modules.vehicle.dto.VehicleDto</class-b>
+
+        <field>
+            <a>countryMake.name</a>
+            <b>countryMake</b>
+        </field>
+
+        <field>
+            <a>newVehicleBodyType.name</a>
+            <b>newVehicleBodyType</b>
+        </field>
+
+        <field>
+            <a>vehicleBodyType.name</a>
+            <b>vehicleBodyType</b>
+        </field>
+
+        <field>
+            <a>vehicleType.name</a>
+            <b>vehicleType</b>
+        </field>
+
+        <field>
+            <a>vehicleCategory.name</a>
+            <b>vehicleCategory</b>
+        </field>
+
+    </mapping>
+
 </mappings>
