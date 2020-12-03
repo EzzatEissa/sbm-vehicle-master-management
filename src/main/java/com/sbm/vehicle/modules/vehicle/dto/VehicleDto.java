@@ -11,6 +11,8 @@ public class VehicleDto extends BaseDto{
 
     private String vehicleModel;
 
+    private Integer vehicleTypeCode;
+
     private String language;
 
     private String countryMake;

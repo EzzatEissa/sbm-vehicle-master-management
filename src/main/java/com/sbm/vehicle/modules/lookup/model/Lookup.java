@@ -28,9 +28,13 @@ public class Lookup extends BaseEntity implements Serializable {
     @NotNull
     private String name;
 
+    private String nameAr;
+
     private String description;
     
     private String code;
+
+    private Integer nameLic;
 
 	public String getName() {
         return this.name;
@@ -55,4 +59,20 @@ public class Lookup extends BaseEntity implements Serializable {
 	public void setCode(String key) {
 		this.code = key;
 	}
+
+    public Integer getNameLic() {
+        return nameLic;
+    }
+
+    public void setNameLic(Integer nameLic) {
+        this.nameLic = nameLic;
+    }
+
+    public String getNameAr() {
+        return nameAr;
+    }
+
+    public void setNameAr(String nameAr) {
+        this.nameAr = nameAr;
+    }
 }

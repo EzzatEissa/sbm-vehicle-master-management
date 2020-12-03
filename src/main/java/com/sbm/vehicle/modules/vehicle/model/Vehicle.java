@@ -16,6 +16,8 @@ public class Vehicle extends BaseEntity {
 
     private String language;
 
+    private Integer vehicleTypeCode;
+
     @ManyToOne
     private CountryMake countryMake;
 
