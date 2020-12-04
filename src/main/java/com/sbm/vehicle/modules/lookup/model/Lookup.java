@@ -1,30 +1,28 @@
 package com.sbm.vehicle.modules.lookup.model;
 
-import com.sbm.vehicle.common.model.BaseEntity;
-
-import javax.persistence.*;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.NotNull;
-import java.io.Serializable;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "type", discriminatorType = DiscriminatorType.STRING)
-public class Lookup extends BaseEntity implements Serializable {
+public class Lookup {
 	
 	private static final long serialVersionUID = 1L;
 
-//	@Version
-//    @Column(name = "version")
-//    private Integer version;
-//
-//	public Integer getVersion() {
-//        return this.version;
-//    }
-//
-//	public void setVersion(Integer version) {
-//        this.version = version;
-//    }
-
+	@Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "LOOKUP_SEQ")
+    @SequenceGenerator(sequenceName = "LOOKUP_SEQ", allocationSize = 1, name = "LOOKUP_SEQ")
+	private Long id;
+	
     @NotNull
     private String name;
 
@@ -75,4 +73,32 @@ public class Lookup extends BaseEntity implements Serializable {
     public void setNameAr(String nameAr) {
         this.nameAr = nameAr;
     }
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+    
+	@Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((id == null) ? 0 : id.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+
+        Lookup other = (Lookup)obj;
+        if (getId() == null || other.getId() == null)
+            return false;
+
+        return getId().equals(other.getId());
+    } 
+    
 }

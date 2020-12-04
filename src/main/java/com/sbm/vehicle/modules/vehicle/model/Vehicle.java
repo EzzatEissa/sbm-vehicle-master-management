@@ -1,45 +1,75 @@
 package com.sbm.vehicle.modules.vehicle.model;
 
-import com.sbm.vehicle.common.model.BaseEntity;
-import com.sbm.vehicle.modules.lookup.model.*;
-import lombok.Data;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 
-import javax.persistence.*;
+import com.sbm.vehicle.modules.lookup.model.Lookup;
+
+import lombok.Data;
 
 @Entity
 @Data
-public class Vehicle extends BaseEntity {
+public class Vehicle {
 
-    private String vehicleMaker;
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "VEHICLE_SEQ")
+	@SequenceGenerator(sequenceName = "VEHICLE_SEQ", allocationSize = 1, name = "VEHICLE_SEQ")
+	private Long id;
 
-    private String vehicleModel;
+	private String vehicleMaker;
 
-    private String language;
+	private String vehicleModel;
 
-    private Integer vehicleTypeCode;
+	private String language;
 
-    @ManyToOne
-    private CountryMake countryMake;
+	private Integer vehicleTypeCode;
 
-    @ManyToOne
-    private NewVehicleBodyType newVehicleBodyType;
+	@ManyToOne
+	private Lookup countryMake;
 
-    @ManyToOne
-    private VehicleBodyType vehicleBodyType;
+	@ManyToOne
+	private Lookup newVehicleBodyType;
 
-    @ManyToOne
-    private VehicleType vehicleType;
+	@ManyToOne
+	private Lookup vehicleBodyType;
 
-    @ManyToOne
-    private VehicleCategory vehicleCategory;
+	@ManyToOne
+	private Lookup vehicleType;
 
-    private Boolean category50per50;
+	@ManyToOne
+	private Lookup vehicleCategory;
 
-    private Boolean usedCategory;
+	private Boolean category50per50;
 
-    private Integer cdaInput;
+	private Boolean usedCategory;
 
-    private Boolean active;
+	private Integer cdaInput;
 
-    private Integer sijilVehicleCode;
+	private Boolean active;
+
+	private Integer sijilVehicleCode;
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+
+		Vehicle other = (Vehicle) obj;
+		if (getId() == null || other.getId() == null)
+			return false;
+
+		return getId().equals(other.getId());
+	}
 }

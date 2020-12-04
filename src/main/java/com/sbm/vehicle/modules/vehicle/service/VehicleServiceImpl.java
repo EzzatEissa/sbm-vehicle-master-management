@@ -133,7 +133,6 @@ public class VehicleServiceImpl implements com.sbm.vehicle.modules.vehicle.servi
 
     @Override
     public List<VehicleDto> getVehiclesByFields(VehicleDto vehicleDto) throws GenericExceptionMapper {
-        vehicleDto.setCountryMake(null);
         List<Vehicle> vehicles = vehicleRepo.getVehiclesByFields(vehicleDto);
         List<VehicleDto> vehiclesDto = mapperHelper.transform(vehicles, VehicleDto.class);
         return vehiclesDto;
