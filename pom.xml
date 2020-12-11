@@ -16,9 +16,42 @@
 
 	<properties>
 		<java.version>1.8</java.version>
+		<holon.platform.version>5.5.0</holon.platform.version>
 	</properties>
 
+	<dependencyManagement>
+		<dependencies>
+			<!-- Holon Platform BOM -->
+			<dependency>
+				<groupId>com.holon-platform</groupId>
+				<artifactId>bom</artifactId>
+				<version>${holon.platform.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
 	<dependencies>
+
+		<!-- Holon JAX-RS using Jersey -->
+		<dependency>
+			<groupId>com.holon-platform.jaxrs</groupId>
+			<artifactId>holon-starter-jersey</artifactId>
+		</dependency>
+
+		<!-- Swagger V3 -->
+		<dependency>
+			<groupId>com.holon-platform.jaxrs</groupId>
+			<artifactId>holon-jaxrs-swagger-v2</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.swagger.core.v3</groupId>
+			<artifactId>swagger-jaxrs2</artifactId>
+			<version>2.1.0</version>
+		</dependency>
+
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-jersey</artifactId>
@@ -98,6 +131,47 @@
 				<groupId>org.eclipse.jkube</groupId>
 				<artifactId>openshift-maven-plugin</artifactId>
 				<version>1.0.0</version>
+			</plugin>
+
+			<plugin>
+				<groupId>sbm.generators.swagger</groupId>
+				<artifactId>generator-swagger-maven-plugin</artifactId>
+				<configuration>
+					<swaggerConfig>
+						<info>
+							<title>Vehicle API Specification</title>
+							<description>Swagger for Vehicle API
+								Specification
+							</description>
+							<version>1.0.0</version>
+							<termsOfService>https://www.sbm.com.sa</termsOfService>
+							<contact>
+								<email>mhassanein@sbm.com.sa</email>
+								<name>Saudi Business Machines</name>
+								<url>https://www.sbm.com.sa</url>
+							</contact>
+						</info>
+					</swaggerConfig>
+					<resourcePackages>
+						<resourcePackage>com.sbm.vehicle.modules.vehicle.controller</resourcePackage>
+					</resourcePackages>
+					<outputFormats>
+						<outputFormat>YAML</outputFormat>
+						<outputFormat>JSON</outputFormat>
+					</outputFormats>
+					<outputDirectory>target/full</outputDirectory>
+					<outputFilename>vehicle-api</outputFilename>
+
+					<project implementation="io.openapitools.swagger.MavenProjectStub"/>
+				</configuration>
+
+				<executions>
+					<execution>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
