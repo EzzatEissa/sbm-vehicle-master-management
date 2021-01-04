@@ -1,5 +1,6 @@
 package com.sbm.vehicle.modules.vehicle.service;
 
+import com.sbm.vehicle.modules.vehicle.dto.PageResultDto;
 import com.sbm.vehicle.common.consts.AppConstants;
 import com.sbm.vehicle.common.exception.GenericExceptionMapper;
 import com.sbm.vehicle.common.utils.MapperHelper;
@@ -9,13 +10,16 @@ import com.sbm.vehicle.modules.vehicle.dto.VehicleDto;
 import com.sbm.vehicle.modules.vehicle.model.Vehicle;
 import com.sbm.vehicle.modules.vehicle.repository.VehicleRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class VehicleServiceImpl implements com.sbm.vehicle.modules.vehicle.service.VehicleService {
+public class VehicleServiceImpl implements VehicleService {
 
     @Autowired
     private VehicleRepo vehicleRepo;
@@ -50,8 +54,20 @@ public class VehicleServiceImpl implements com.sbm.vehicle.modules.vehicle.servi
     }
 
     @Override
-    public List<VehicleDto> getAllVehicles() {
-        return mapperHelper.transform(vehicleRepo.findAll(), VehicleDto.class);
+    public PageResultDto getAllVehicles(int page, int size) {
+    	
+    	Pageable pageable = PageRequest.of(page, size);
+    	Page<Vehicle> vehiclePage = vehicleRepo.findAll(pageable);
+    	List<VehicleDto> dealerDtos= mapperHelper.transform(vehiclePage.getContent(), VehicleDto.class);
+    	
+    	PageResultDto pageResultDto = new PageResultDto();
+    	
+    	pageResultDto.setContents(dealerDtos);
+    	pageResultDto.setCurrentPage(vehiclePage.getNumber());
+    	pageResultDto.setTotalPages(vehiclePage.getTotalPages());
+    	pageResultDto.setTotalElements(vehiclePage.getTotalElements());
+    	
+        return pageResultDto;
     }
 
     @Override

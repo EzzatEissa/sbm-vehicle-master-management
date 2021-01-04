@@ -94,6 +94,7 @@
 			<version>5.5.1</version>
 		</dependency>
 		
+		
 		<dependency>
 			<groupId>com.oracle.ojdbc</groupId>
 			<artifactId>ojdbc8</artifactId>
@@ -105,6 +106,13 @@
             <artifactId>HikariCP</artifactId>
         </dependency>
 
+ 
+ <dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+		
+		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -133,7 +141,7 @@
 				<version>1.0.0</version>
 			</plugin>
 
-			<plugin>
+			<!-- <plugin>
 				<groupId>sbm.generators.swagger</groupId>
 				<artifactId>generator-swagger-maven-plugin</artifactId>
 				<configuration>
@@ -153,14 +161,14 @@
 						</info>
 					</swaggerConfig>
 					<resourcePackages>
-						<resourcePackage>com.sbm.vehicle.modules.vehicle.controller</resourcePackage>
+						<resourcePackage>com.sbm.vehicle.modules.lookup.controller</resourcePackage>
 					</resourcePackages>
 					<outputFormats>
 						<outputFormat>YAML</outputFormat>
 						<outputFormat>JSON</outputFormat>
 					</outputFormats>
 					<outputDirectory>target/full</outputDirectory>
-					<outputFilename>vehicle-api</outputFilename>
+					<outputFilename>vehicle-lookups-api</outputFilename>
 
 					<project implementation="io.openapitools.swagger.MavenProjectStub"/>
 				</configuration>
@@ -172,7 +180,7 @@
 						</goals>
 					</execution>
 				</executions>
-			</plugin>
+			</plugin> -->
 		</plugins>
 	</build>
 

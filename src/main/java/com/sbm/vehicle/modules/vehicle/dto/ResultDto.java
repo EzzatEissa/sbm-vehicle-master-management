@@ -1,10 +1,30 @@
 package com.sbm.vehicle.modules.vehicle.dto;
 
+import com.fasterxml.jackson.annotation.JsonClassDescription;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyDescription;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
+
+@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
+@JsonClassDescription("General Dto for all api response")
 public class ResultDto {
 
+	@JsonProperty(required = false)
+	@JsonPropertyDescription("type to have response type 'error or success'")
     private String type;
+	
+	@JsonProperty(required = false)
+	@JsonPropertyDescription("code to have error or success code")
     private String code;
+	
+	@JsonProperty(required = false)
+	@JsonPropertyDescription("msg to have error or success message")
     private String msg;
+	
+	@JsonProperty(required = false)
+	@JsonPropertyDescription("value to have response value")
+	private Object value;
 
     public String getType() {
         return type;
@@ -29,4 +49,12 @@ public class ResultDto {
     public void setMsg(String msg) {
         this.msg = msg;
     }
+
+	public Object getValue() {
+		return value;
+	}
+
+	public void setValue(Object value) {
+		this.value = value;
+	}
 }

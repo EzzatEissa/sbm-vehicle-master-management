@@ -37,22 +37,31 @@ public class VehicleController {
     @Autowired
     private VehicleService vehicleService;
 
-    @ApiOperation("Get All Vehicles")
+    @ApiOperation(value = "Get All Vehicles", notes = "Get All Vehicles")
     @GET
     @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
     @ApiResponses({ @ApiResponse(code = 200, message = "Get All Vehicles", responseHeaders = {
-            @ResponseHeader(name = "x-fapi-interaction-id", description = "An RFC4122 UID used as a correlation id.", response = String.class) }, response = List.class) })
-    public Response getAllVehicles() {
-        return Response.status(200).entity(vehicleService.getAllVehicles()).build();
+            @ResponseHeader(name = "x-fapi-interaction-id", description = "An RFC4122 UID used as a correlation id.", response = String.class) }, response = ResultDto.class) })
+    public Response getAllVehicles(
+    		@ApiParam(value = "pagination page number", required = false) @DefaultValue("0") @QueryParam("page") int page, 
+    		@ApiParam(value = "pagination size per page", required = false) @DefaultValue("10") @QueryParam("size") int size) {
+    	
+    	ResultDto resultDto = new ResultDto();
+        resultDto.setCode("200");
+        resultDto.setMsg("Done");
+        resultDto.setType("success");
+        resultDto.setValue(vehicleService.getAllVehicles(page, size));
+        
+        return Response.status(200).entity(resultDto).build();
     }
 
-    @ApiOperation("Create Vehicle details")
+    @ApiOperation(value = "Create Vehicle details", notes = "Create Vehicle details")
     @POST
     @Consumes(MediaType.APPLICATION_JSON + ";charset=utf-8")
     @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
     @ApiResponses({ @ApiResponse(code = 200, message = "Vehicle Created Successfully", responseHeaders = {
             @ResponseHeader(name = "x-fapi-interaction-id", description = "An RFC4122 UID used as a correlation id.", response = String.class) }, response = ResultDto.class) })
-    public Response createVehicle(@Valid VehicleDto vehicleDto) throws GenericExceptionMapper{
+    public Response createVehicle(@ApiParam(value = "vehicle object used to insert vehicle", required = true) @Valid VehicleDto vehicleDto) throws GenericExceptionMapper{
         vehicleService.saveVehicle(vehicleDto);
         ResultDto resultDto = new ResultDto();
         resultDto.setCode("201");
@@ -61,24 +70,31 @@ public class VehicleController {
         return Response.status(201).entity(resultDto).build();
     }
 
-    @ApiOperation("Get Vehicle By Id")
+    @ApiOperation(value = "Get Vehicle By Id", notes = "Get Vehicle By Id")
     @GET
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
     @ApiResponses({ @ApiResponse(code = 200, message = "Get Vehicle Info By Id", responseHeaders = {
-            @ResponseHeader(name = "x-fapi-interaction-id", description = "An RFC4122 UID used as a correlation id.", response = String.class) }, response = VehicleDto.class) })
-    public Response getVehicleById(@PathParam("id") Long id) throws GenericExceptionMapper{
-        return Response.status(200).entity(vehicleService.getVehicleById(id)).build();
+            @ResponseHeader(name = "x-fapi-interaction-id", description = "An RFC4122 UID used as a correlation id.", response = String.class) }, response = ResultDto.class) })
+    public Response getVehicleById(@ApiParam(value = "id used to get vehicle info", required = true) @PathParam("id") Long id) throws GenericExceptionMapper{
+    	
+    	ResultDto resultDto = new ResultDto();
+        resultDto.setCode("200");
+        resultDto.setMsg("Done");
+        resultDto.setType("success");
+        resultDto.setValue(vehicleService.getVehicleById(id));
+        
+        return Response.status(200).entity(resultDto).build();
     }
 
-    @ApiOperation("Update Vehicle By Id")
+    @ApiOperation(value = "Update Vehicle By Id", notes = "Update Vehicle By Id")
     @PUT
     @Consumes(MediaType.APPLICATION_JSON + ";charset=utf-8")
     @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
     @Path("/{id}")
     @ApiResponses({ @ApiResponse(code = 200, message = "Update Vehicle Info By Id", responseHeaders = {
             @ResponseHeader(name = "x-fapi-interaction-id", description = "An RFC4122 UID used as a correlation id.", response = String.class) }, response = ResultDto.class) })
-    public Response updateVehicle(@PathParam("id") Long id, VehicleDto vehicleDto) throws GenericExceptionMapper{
+    public Response updateVehicle(@ApiParam(value = "id used for update", required = true) @PathParam("id") Long id, @ApiParam(value = "vehicle object used to update vehicle info", required = false) VehicleDto vehicleDto) throws GenericExceptionMapper{
         vehicleDto.setId(id);
         vehicleService.updateVehicle(vehicleDto);
         ResultDto resultDto = new ResultDto();
@@ -88,13 +104,13 @@ public class VehicleController {
         return Response.status(200).entity(resultDto).build();
     }
 
-    @ApiOperation("Delete Vehicle By Id")
+    @ApiOperation(value = "Delete Vehicle By Id", notes = "Delete Vehicle By Id")
     @DELETE
     @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
     @Path("/{id}")
     @ApiResponses({ @ApiResponse(code = 204, message = "Delete Vehicle By Id", responseHeaders = {
             @ResponseHeader(name = "x-fapi-interaction-id", description = "An RFC4122 UID used as a correlation id.", response = ResultDto.class) }) })
-    public Response deleteVehicle(@PathParam("id") Long id) throws GenericExceptionMapper {
+    public Response deleteVehicle(@ApiParam(value = "id used for delete", required = true) @PathParam("id") Long id) throws GenericExceptionMapper {
         vehicleService.deleteVehicle(id);
         ResultDto resultDto = new ResultDto();
         resultDto.setCode("200");
@@ -103,23 +119,23 @@ public class VehicleController {
         return Response.status(200).entity(resultDto).build();
     }
 
-    @ApiOperation("Search For Vehicles By Any Fields")
+    @ApiOperation(value = "Search For Vehicles By Any Fields", notes = "Search For Vehicles By Any Fields")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/search")
     @ApiResponses({ @ApiResponse(code = 200, message = "Search For Vehicles By Any Fields", responseHeaders = {
-            @ResponseHeader(name = "x-fapi-interaction-id", description = "An RFC4122 UID used as a correlation id.", response = String.class) }, response = List.class) })
-    public Response getVehiclesByFields(@QueryParam("vehicleMaker") String vehicleMaker,
-                                        @QueryParam("vehicleModel") String vehicleModel,
-                                        @QueryParam("countryMake") String countryMake,
-                                        @QueryParam("newVehicleBodyType") String newVehicleBodyType,
-                                        @QueryParam("vehicleBodyType") String vehicleBodyType,
-                                        @QueryParam("vehicleType") String vehicleType,
-                                        @QueryParam("vehicleCategory") String vehicleCategory,
-                                        @QueryParam("category50per50") Boolean category50per50,
-                                        @QueryParam("usedCategory") Boolean usedCategory,
-                                        @QueryParam("cdaInput") Integer cdaInput,
-                                        @QueryParam("sijilVehicleCode") Integer sijilVehicleCode
+            @ResponseHeader(name = "x-fapi-interaction-id", description = "An RFC4122 UID used as a correlation id.", response = String.class) }, response = ResultDto.class) })
+    public Response getVehiclesByFields(@ApiParam(value = "vehicle_maker", required = false) @QueryParam("vehicle_maker") String vehicleMaker,
+    		@ApiParam(value = "vehicle_model", required = false) @QueryParam("vehicle_model") String vehicleModel,
+    		@ApiParam(value = "country_make", required = false) @QueryParam("country_make") String countryMake,
+    		@ApiParam(value = "new_vehicle_body_type", required = false) @QueryParam("new_vehicle_body_type") String newVehicleBodyType,
+    		@ApiParam(value = "vehicle_body_type", required = false) @QueryParam("vehicle_body_type") String vehicleBodyType,
+    		@ApiParam(value = "vehicle_type", required = false) @QueryParam("vehicle_type") String vehicleType,
+    		@ApiParam(value = "vehicle_category", required = false) @QueryParam("vehicle_category") String vehicleCategory,
+    		@ApiParam(value = "category50per50", required = false) @QueryParam("category50per50") Boolean category50per50,
+    		@ApiParam(value = "used_category", required = false) @QueryParam("used_category") Boolean usedCategory,
+    		@ApiParam(value = "cda_input", required = false) @QueryParam("cda_input") Integer cdaInput,
+    		@ApiParam(value = "sijil_vehicle_code", required = false) @QueryParam("sijil_vehicle_code") Integer sijilVehicleCode
                                         ) throws GenericExceptionMapper {
         VehicleDto vehicleDto = new VehicleDto();
         vehicleDto.setVehicleMaker(vehicleMaker);
@@ -135,7 +151,14 @@ public class VehicleController {
         vehicleDto.setSijilVehicleCode(sijilVehicleCode);
 
         List<VehicleDto> vehicleDtos = vehicleService.getVehiclesByFields(vehicleDto);
-        return Response.status(200).entity(vehicleDtos).build();
+        
+        ResultDto resultDto = new ResultDto();
+        resultDto.setCode("200");
+        resultDto.setMsg("Done");
+        resultDto.setType("success");
+        resultDto.setValue(vehicleDtos);
+        
+        return Response.status(200).entity(resultDto).build();
     }
 
 }
